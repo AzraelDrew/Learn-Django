@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>template_syntax</title>
+  </head>
+  <body>
+    <h1>模版语法学习</h1>
+    {% comment %} 显示单个变量 {% endcomment %}
+    <div>{{n1}}</div>
+    <div>{{n2}}</div>
+    {% comment %} 获取列表中的数据 {% endcomment %}
+    <div>{{n2.0}}</div>
+    <div>{{n2.1}}</div>
+    <div>{{n2.2}}</div>
+    <!--使用循环展示数据-->
+
+    <!--使用循环展示列表数据-->
+
+    {%for item in n2%}
+    <span>{{item}}</span>
+    {%endfor%}
+    <hr />
+    {{n3}}
+    <hr />
+    <!--展示字典数据-->
+
+    {{n3.name}} {{n3.salary}} {{n3.role}}
+    <hr />
+
+    <!--使用循环展示字典数据(键)-->
+
+    <ul>
+      {%for item in n3.keys %}
+      <li>{{item}}</li>
+      {% endfor%}
+    </ul>
+    <!--使用循环展示字典数据(值)-->
+
+    <ul>
+      {%for item in n3.values %}
+      <li>{{item}}</li>
+      {% endfor%}
+    </ul>
+    <ul>
+      {%for item in n3.items %}
+      <li>{{item}}</li>
+      {% endfor%}
+    </ul>
+    <!--使用循环展示字典数据(键值对)-->
+
+    <ul>
+      {%for k,v in n3.items %}
+      <li>{{k}} = {{v}}</li>
+      {% endfor%}
+    </ul>
+
+    <hr />
+    {{n4}}
+    <div>{{n4.0}}</div>
+    <div>{{n4.0.name}}</div>
+    <div>{{n4.0.salary}}</div>
+    <div>{{n4.0.role}}</div>
+    <div>{{n4.1}}</div>
+    <div>{{n4.2}}</div>
+
+    {%for item in n4 %}
+    <div>{{item.name}}</div>
+    <div>{{item.salary}}</div>
+    <div>{{item.role}}</div>
+    {% endfor%}
+
+    <hr />
+
+    {%if n1 == "Azrael" %}
+    <h1>{{n1}}</h1>
+    {%else %}
+    <h1>不是Azrael</h1>
+    {% endif %}
+    <hr />
+    {% if n1 == "Azrael" %}
+    <h1>{{n1}}1</h1>
+    <h1>{{n1}}2</h1>
+    {% elif n1 == "alex" %}
+    <h1>{{n1}}</h1>
+    {%else %}
+    <h1>不是Azrael</h1>
+    {% endif %}
+  </body>
+</html>

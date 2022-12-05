@@ -1,0 +1,24 @@
+{% comment %} django中使用静态文件 {% endcomment %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    {% comment %} 引入静态文件 {% endcomment %}
+    <link
+      rel="stylesheet"
+      href="{%static 'plugins/bootstrap-3.4.1/css/bootstrap.css' %}"
+    />
+  </head>
+  <body>
+    <h1>用户列表</h1>
+    {% comment %} 引入静态文件 {% endcomment %}
+    <img src="{%static 'img/1.jpg' %}" style="width: 20%" alt="" />
+    <input name="" id="" class="btn btn-primary" type="button" value="新建" />
+    {% comment %} 引入静态文件 {% endcomment %}
+    <script src="{% static 'js/jquery.min.js'%}"></script>
+    <script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.min.js'%}"></script>
+  </body>
+</html>
