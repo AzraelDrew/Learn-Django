@@ -64,15 +64,15 @@ app
 
 - 注册 app  在setting.py中的  INSTALLED_APPS中添加  appname.apps.AppConfig   [setting.py]
 
-![](/Users/alex/Desktop/Learn-Django/alex01.png)
+![](./img/alex01.png)
 
 - 编写 URL 和视图函数的对应关系   [urls.py]
 
-![](/Users/alex/Desktop/Learn-Django/alex05.png)
+![](./img/alex05.png)
 
 - 编写视图函数  [views.py]
 
-![](/Users/alex/Desktop/Learn-Django/alex02.png)
+![](./img/alex02.png)
 
 - 启动Django项目
 
@@ -88,11 +88,11 @@ app
 url->函数->执行函数
 ```
 
-![](/Users/alex/Desktop/Learn-Django/alex03.png)
+![](./img/alex03.png)
 
 > templates模版
 
-![](/Users/alex/Desktop/Learn-Django/alex04.png)
+![](./img/alex04.png)
 
 > 静态文件
 
@@ -104,14 +104,55 @@ url->函数->执行函数
 
 **都视为静态文件存放在/appname/static/下**
 
-![](/Users/alex/Desktop/Learn-Django/alex.png)
+![](./img/alex.png)
 
 - 引用静态文件
 
-![](/Users/alex/Desktop/Learn-Django/alex06.png)
+![](./img/alex06.png)
 
 > 模版语法
 
 *本质上:在HTML中写一些占位符,由数据对这些占位符进行替换和处理*
 
-![](/Users/alex/Desktop/Learn-Django/template_syntax.png)
+![](./img/template_syntax.png)
+
+> 请求和响应
+
+![](./img/alex08.png)
+
+- redirect重定向工作方式如下(Django返回一个值后,浏览器再去向这个页面发起请求)
+
+![](./img/alex07.png)
+
+> form表单提交报错
+
+![](./img/alex09.png)
+
+- 解决办法(在form表单内部添加   {% csrf_token %}  )
+
+![](./img/alex10.png)
+
+> Django使用ORM操作数据库
+
+![](./img/alex11.png)
+
+- 安装第三方模块
+
+```shell
+pip3 install mysqlclient
+```
+
+> ORM
+
+- 创建、修改、删除数据库中的表(不用写SQL语句);[无法创建数据库]
+- 操作表中的数据(不用写SQL语句)
+
+> Django连接数据库
+
+- 在setting.py中进行配置和修改
+
+> Django操作表(在models.py中)
+
+- 创建表
+- 删除表
+- 修改表

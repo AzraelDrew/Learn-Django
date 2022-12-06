@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>news</title>
+  </head>
+  <body>
+    <h1>用户登录</h1>
+    <form method="post" action="/login/">
+
+      {% csrf_token %}      <!-- 403报错  若没有Django会阻拦请求 -->
+        <input type="text" name="user" placeholder="用户名"></input>
+        <input type="password" name="pwd" placeholder="密码"></input>
+
+        <input type="submit" value="提交">
+        <span style="color:red">{{error_msg}}</span>
+    </form>
+  </body>
+</html>

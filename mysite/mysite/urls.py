@@ -27,5 +27,13 @@ urlpatterns = [
     path('user/add/',views.user_add),
 
     path('template_syntax/',views.template_syntax),
+
+    # 伪联通新闻中心
     path('news/',views.news),
+
+    # 请求和响应
+    path('something/',views.something),
+
+    # 用户登录
+    path('login/',views.login),
 ]
