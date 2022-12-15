@@ -154,5 +154,60 @@ pip3 install mysqlclient
 > Django操作表(在models.py中)
 
 - 创建表
+
+```python
+class UserInfo(models.Model):
+    name = models.CharField(max_length=32)
+    password = models.CharField(max_length=64)
+    age = models.IntegerField()
+    
+    
+  """ 
+上述代码等同于
+create table appname_classname[小写的类名](
+    id bigint auto_increment primary key,   此行为自动生成
+    name varchar(32),
+    password varchar(64),
+    age int
+)
+"""
+ 
+
+# 在此之前app必须注册
+# setting.py  INSTALLED_APPS中添加      'app.apps.AppConfig'  #appname下apps.py中的AppnameConfig(第一个class)
+
+
+python3 manage.py makemigrations  # 检查是否更改
+
+python3 manage.py migrate         # 应用更改
+```
+
+
+
 - 删除表
+
+*删除相应的class 再执行上述命令*  
+
 - 修改表
+
+在表中新增列时,由于已存在的的列中可能已有数据，所以新增的列必须要指定数据
+
+- ​	
+
+  - 手动添加
+
+  ![](./img/alex12.png)
+
+  - 设置默认值 
+
+  ```python
+  size = models.IntegerField(default=5)
+  ```
+
+  - 允许为空
+
+  ```python
+  data = models.IntegerField(null=True,blank=True) 
+  ```
+
+> Django操作表中的数据

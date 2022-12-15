@@ -79,3 +79,39 @@ def login(request):
         return redirect('http://www.chinaunicom.com/')
     # return HttpResponse("登录失败")
     return render(request,"login.html",{"error_msg":"用户名或密码错误"})
+
+
+    # ORM
+
+from app.models import UserInfo,Deparment
+
+def orm(request):
+        #测试ORM操作表中的数据
+        # ### 1.新建 ###
+        # Deparment.objects.create(title="销售部")
+        # Deparment.objects.create(title="IT部")
+        # Deparment.objects.create(title="运营部")
+
+        # UserInfo.objects.create(name="Azrael",password="123",age=19)
+        # UserInfo.objects.create(name="Alex",password="666",age=29)
+        # UserInfo.objects.create(name="drew",password="666")
+
+
+        # ### 2.删除 ###
+        # UserInfo.objects.filter(age=2).delete()   #删除age=2的数据
+        # Deparment.objects.all().delete()   #删除所有数据
+
+        # ### 3.获取数据 ###
+        # Querset = [obj,obj,obj]    一个列表中有多个对象
+        # QuerySet =  UserInfo.objects.all()   #获取当前表的所有数据
+        # print(QuerySet)
+
+        # for obj in QuerySet:
+        #     print(obj.id,obj.name,obj.password,obj.age)
+
+        QuerySet = UserInfo.objects.filter(age=29)
+        print(QuerySet)
+        for obj in QuerySet:
+            print(obj.id,obj.name,obj.password,obj.age)
+
+        return HttpResponse("OK")

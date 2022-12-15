@@ -36,4 +36,7 @@ urlpatterns = [
 
     # 用户登录
     path('login/',views.login),
+
+    # ORM
+    path('orm/',views.orm),
 ]
