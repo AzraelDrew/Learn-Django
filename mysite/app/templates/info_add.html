@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用户管理</title>
+  </head>
+  <body>
+    <h1>添加用户</h1>
+    {% comment %} 向当前页面发送请求不需要action属性 {% endcomment %}
+
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" name="user" placeholder="姓名" />
+      <input type="text" name="pwd" placeholder="密码" />
+      <input type="text" name="age" placeholder="年龄" />
+      <input type="submit" value="提交" />
+    </form>
+  </body>
+</html>

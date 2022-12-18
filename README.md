@@ -211,3 +211,5 @@ python3 manage.py migrate         # 应用更改
   ```
 
 > Django操作表中的数据
+
+![](./img/alex13.png)

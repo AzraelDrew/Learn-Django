@@ -1,4 +1,5 @@
 from django.shortcuts import render,HttpResponse,redirect
+from app.models import UserInfo,Deparment
 
 # Create your views here.
 def index(request):   #request为默认参数   是一个对象,封装了用户发送过来的所有数据
@@ -80,11 +81,7 @@ def login(request):
     # return HttpResponse("登录失败")
     return render(request,"login.html",{"error_msg":"用户名或密码错误"})
 
-
-    # ORM
-
-from app.models import UserInfo,Deparment
-
+# ORM
 def orm(request):
         #测试ORM操作表中的数据
         # ### 1.新建 ###
@@ -109,9 +106,51 @@ def orm(request):
         # for obj in QuerySet:
         #     print(obj.id,obj.name,obj.password,obj.age)
 
-        QuerySet = UserInfo.objects.filter(age=29)
-        print(QuerySet)
-        for obj in QuerySet:
-            print(obj.id,obj.name,obj.password,obj.age)
+        # QuerySet = UserInfo.objects.filter(age=29)
+        # print(QuerySet)
+        # for obj in QuerySet:
+        #     print(obj.id,obj.name,obj.password,obj.age)
+
+        # row_obj = UserInfo.objects.filter(age=29).first()  #获取到第一个对象
+        # print(row_obj.id,row_obj.name,row_obj.password,row_obj.age)
+
+
+        # ### 4.更新数据 ###
+        # UserInfo.objects.all().update(password=999)
+        # UserInfo.objects.filter(age=19).update(password=666)
 
         return HttpResponse("OK")
+
+
+# 用户管理
+def info_list(request):
+
+    # 获取所有用户信息
+    data_list = UserInfo.objects.all()
+
+    # 渲染 返回给用户
+    return render(request, 'info_list.html',{"data_list":data_list})
+def info_add(request):
+
+
+    if request.method == 'GET':
+        return render(request,"info_add.html")
+    if request.method == 'POST':
+        # 获取用户提交数据
+        user = request.POST.get("user")
+        pwd = request.POST.get("pwd")
+        age = request.POST.get("age")
+        print(user,pwd,age)
+
+        # 添加到数据库
+        UserInfo.objects.create(name=user,password=pwd,age=age)
+
+        # return HttpResponse("添加成功")
+        return redirect("/info/list/")
+    return HttpResponse("Error")
+
+
+def info_delete(request):
+    nid  = request.GET.get("nid")
+    UserInfo.objects.filter(id=nid).delete()
+    return redirect("/info/list/")
