@@ -1,0 +1,47 @@
+{% extends "layout.html" %} {% block content %}
+<div class="container">
+  <div style="margin-bottom: 10px">
+    <a class="btn btn-success" href="/depart/add/">
+      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+      新建部门</a
+    >
+  </div>
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+      部门列表
+    </div>
+
+    <!-- Table -->
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>名称</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in queryset %}
+
+        <tr>
+          <th>{{item.id}}</th>
+          <td>{{item.title}}</td>
+          <td>
+            <a class="btn btn-primary btn-xs" href="/depart/{{item.id}}/edit/"
+              >编辑</a
+            >
+            <a
+              class="btn btn-danger btn-xs"
+              href="/depart/delete/?nid={{item.id}}"
+              >删除</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

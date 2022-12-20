@@ -213,3 +213,75 @@ python3 manage.py migrate         # 应用更改
 > Django操作表中的数据
 
 ![](./img/alex13.png)
+
+
+
+> URL传值
+
+- 匹配
+
+  - ```python
+    /depart/<int:nid>/edit/
+    ```
+
+- ?
+
+  - ```python
+    /depart/edit/?nid=int&name=str
+    ```
+
+> 模版继承  
+
+- ```django
+  # 模版
+  {% block css %}     {% endblock %}       
+  
+  <div>
+    {% block TagName %}{% endblock %}    # 相当于占位符
+  </div>
+  
+  {% block js %}      {% endblock %}  
+  
+  ```
+
+- ```django
+  # 继承模版
+  
+  {% extends "template.html" %}     #必须先继承
+  
+  {% block css  %}  
+      <link
+        rel="stylesheet"
+        href="{% static 'plugins....min.css'  %}"
+      />
+  <style>
+  	....
+  </style>
+  {% endblock %}
+  
+  {% block TagName %}
+  <h1>首页</h1>         # 替换占位符
+  {% endblock %}
+  
+  
+  {% block js %}   
+  <script src="{% static 'plugins....min.js'  %}"></script>
+  <script>
+  	...
+  </script>
+  {% endblock %} 
+  ```
+
+- 
+
+![](./img/alex14.png)
+
+![](./img/alex15.png)
+
+![](./img/alex16.png)
+
+![](./img/alex17.png)
+
+![](./img/alex18.png)
+
+> FORM组件
