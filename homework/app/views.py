@@ -78,18 +78,50 @@ def user_add(request):
         return render(request,"user_add.html",context)
 
     # 获取用户提交的数据
-    # user = request.POST.get("user")
-    # password = request.POST.get("pwd")
-    # age = request.POST.get("age")
-    # account = request.POST.get("ac")
-    # create_time = request.POST.get("create_time")
-    # gender_id = request.POST.get("gender")
-    # depart_id= request.POST.get("depart")
-    # print(user,password,age,account,create_time,gender_id,depart_id)
-    # models.UserInfo.objects.create(name=user,password = password,age = age,account = account,create_time = create_time,gender = gender_id,depart_id = depart_id)
-
-
-
+    user = request.POST.get("user")
+    password = request.POST.get("pwd")
+    age = request.POST.get("age")
+    account = request.POST.get("ac")
+    create_time = request.POST.get("create_time")
+    gender_id = request.POST.get("gender")
+    depart_id= request.POST.get("depart")
+    # print(user,password,age,account,create_time,gender_id,depart_id) 
+    models.UserInfo.objects.create(name=user,password = password,age = age,account = account,create_time = create_time,gender = gender_id,depart_id = depart_id)
 
     # 重定向
     return redirect("/user/list/")
+
+# modelform 添加用户
+
+from django import forms
+
+class  UserModelForm(forms.ModelForm):
+    name = forms.CharField(min_length=3,label="用户名")
+    class Meta:
+        model = models.UserInfo
+        fields = ['name','password','age','account','create_time','gender','depart']
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for name,item in self.fields.items():
+            # 使用插件添加属性
+            item.widget.attrs = {"class":"form-control","placeholder":item.label}
+
+def user_modelform_add(request):
+    if request.method =="GET":
+        form  = UserModelForm()
+        return render(request,"user_modelform_add.html",{"form":form})
+
+    # 提交交都数据
+    form  = UserModelForm(data = request.POST)
+    if form.is_valid():
+        # 保存数据
+        form.save()
+        # 重定向
+        return redirect("/user/list/")
+    else:
+        # 返回错误信息
+        return render(request,"user_modelform_add.html",{"form":form})
+
+def  user_edit(rquest):
+    return render()

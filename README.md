@@ -162,7 +162,8 @@ class UserInfo(models.Model):
     age = models.IntegerField()
     
     
-  """ 
+""" 
+
 上述代码等同于
 create table appname_classname[小写的类名](
     id bigint auto_increment primary key,   此行为自动生成
@@ -170,6 +171,7 @@ create table appname_classname[小写的类名](
     password varchar(64),
     age int
 )
+
 """
  
 

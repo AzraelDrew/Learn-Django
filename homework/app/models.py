@@ -5,6 +5,9 @@ from django.db import models
 class Department(models.Model):
     title = models.CharField(verbose_name="标题",max_length=32)   # verbose_name  对当前列进行备注(可以写可不写)
 
+    def __str__(self) :
+        return self.title
+
 # 员工表
 class UserInfo(models.Model):
     name = models.CharField(verbose_name="姓名",max_length=32)
@@ -22,7 +25,7 @@ class UserInfo(models.Model):
     # to  表示与那张表又关联
     # to_fied   关联表中的那一列
     # on_delete=models.CASCADE   级联删除  当部门被删除时用户也被删除
-    depart = models.ForeignKey(verbose_name="部门ID",to="Department", to_field="id", on_delete=models.CASCADE)
+    depart = models.ForeignKey(verbose_name="部门",to="Department", to_field="id", on_delete=models.CASCADE)
     # 置为空null=True,blank=True ,on_delete=models.SET_NULL
     # depart = models.BigIntegerField(verbose_name="部门ID",to="Department", to_field="id",null=True,blank=True ,on_delete=models.SET_NULL)
 
