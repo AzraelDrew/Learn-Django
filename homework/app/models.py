@@ -16,7 +16,15 @@ class UserInfo(models.Model):
     account = models.DecimalField(verbose_name="账户余额",max_digits=10,decimal_places=2,default=0)
     # max_digits=10        最多多少位
     # decimal_places=2     小数点后多少位
-    create_time = models.DateTimeField(verbose_name="入职时间")
+
+        
+    
+    # create_time = models.DateTimeField(verbose_name="入职时间")
+
+    #  DateTimeField  包括时分秒
+    create_time = models.DateField(verbose_name="入职时间")
+
+    # DateField  不包括时分秒
 
     # 无约束
     # depart_id = models.BigIntegerField(verbose_name="部门ID")
@@ -35,3 +43,22 @@ class UserInfo(models.Model):
         (2,"女")
     )
     gender = models.SmallIntegerField(verbose_name="性别",choices=gender_choices)
+
+# 靓号
+class PrettyNumber(models.Model):
+    mobile = models.CharField(verbose_name = "手机号",max_length=32)
+    price = models.IntegerField(verbose_name="价格",default=0)
+    level_choices = (
+        (1,"一星"),
+        (2,"二星"),
+        (3,"三星"),
+        (4,"四星"),
+        (5,"五星"),
+    )
+    level = models.SmallIntegerField(verbose_name = "级别",choices=level_choices,default=1)
+
+    status_choices =(
+        (1,"已占用"),
+        (2,"未占用"),
+    )
+    status = models.SmallIntegerField(verbose_name="状态",choices=status_choices,default=1 ) 

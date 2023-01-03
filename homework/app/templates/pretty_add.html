@@ -2,7 +2,7 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">编辑用户</h3>
+      <h3 class="panel-title">新建靓号</h3>
     </div>
     <div class="panel-body">
       <form method="POST" novalidate>
@@ -11,12 +11,6 @@
         {% for item in form %}
         <div class="form-group">
           <label>{{item.label}}</label>
-          {% comment %} <input
-            type="text"
-            class="form-control"
-            placeholder="姓名"
-            name="user"
-          /> {% endcomment %}
           {{item}}
           <span style="color:red" >{{item.errors}} </span>
        {% endfor %}

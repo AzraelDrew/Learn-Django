@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app import views
+from . import views
 urlpatterns = [
     # path('admin/', admin.site.urls),
 
@@ -35,5 +35,14 @@ urlpatterns = [
     path('user/add/', views.user_add),
     path('user/modelform/add/', views.user_modelform_add),
     path('user/<int:nid>/edit/', views.user_edit),
+    path('user/<int:nid>/delete/', views.user_delete),
+
+
+    # 靓号管理
+    path('pretty/list/',views.pretty_list),
+    path('pretty/add/',views.pretty_add),
+    path('pretty/<int:nid>/edit/', views.pretty_edit),
+    path('pretty/<int:nid>/delete/', views.pretty_delete),
+
 
 ]
