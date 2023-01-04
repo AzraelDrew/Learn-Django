@@ -10,54 +10,56 @@
       <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
       新建用户Modelform</a
     >
-    </div>
-    <div class="panel panel-default">
-      <!-- Default panel contents -->
-      <div class="panel-heading">
-        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-        列表
-      </div>
-
-      <!-- Table -->
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>姓名</th>
-            <th>密码</th>
-            <th>年龄</th>
-            <th>余额</th>
-            <th>入职时间</th>
-            <th>性别</th>
-            <th>所属部门</th>
-            <th>操作</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for item in queryset%}
-          <tr>
-            <th>{{item.id}}</th>
-            <td>{{item.name}}</td>
-            <td>{{item.password}}</td>
-            <td>{{item.age}}</td>
-            <td>{{item.account}}</td>
-
-            <td>{{item.create_time }}</td>
-            <td>{{item.get_gender_display}}</td>
-            <td>{{item.depart.title}}</td>
-            <td>
-              <a class="btn btn-primary btn-xs" href="/user/{{item.id}}/edit/"
-                >编辑</a
-              >
-              <a class="btn btn-danger btn-xs" href="/user/{{item.id}}/delete/"
-                >删除</a
-              >
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
   </div>
-  {% endblock %}
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+      列表
+    </div>
+
+    <!-- Table -->
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>姓名</th>
+          <th>密码</th>
+          <th>年龄</th>
+          <th>余额</th>
+          <th>入职时间</th>
+          <th>性别</th>
+          <th>所属部门</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in queryset%}
+        <tr>
+          <th>{{item.id}}</th>
+          <td>{{item.name}}</td>
+          <td>{{item.password}}</td>
+          <td>{{item.age}}</td>
+          <td>{{item.account}}</td>
+
+          <td>{{item.create_time }}</td>
+          <td>{{item.get_gender_display}}</td>
+          <td>{{item.depart.title}}</td>
+          <td>
+            <a class="btn btn-primary btn-xs" href="/user/{{item.id}}/edit/"
+              >编辑</a
+            >
+            <a class="btn btn-danger btn-xs" href="/user/{{item.id}}/delete/"
+              >删除</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <ul class="pagination">
+    {{page_string}}
+  </ul>
 </div>
+{% endblock %}
