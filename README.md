@@ -148,7 +148,7 @@ pip3 install mysqlclient
 
 > Django 操作表(在 models.py 中)
 
-创建表
+- 创建表
 
 ```python
 class UserInfo(models.Model):
@@ -187,11 +187,9 @@ _删除相应的 class 再执行上述命令_
 
 在表中新增列时,由于已存在的的列中可能已有数据，所以新增的列必须要指定数据
 
-- ​
+- 手动添加
 
-  - 手动添加
-
-  ![](./img/alex12.png)
+![](./img/alex12.png)
 
 - 允许为空
 
