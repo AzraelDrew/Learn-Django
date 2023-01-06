@@ -6,10 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Django管理系统</title>
-    <link
-      rel="stylesheet"
-      href="{% static 'plugins/bootstrap/css/bootstrap.min.css'  %}"
-    />
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.min.css'  %}" />
+
+    {% block css %}{% endblock %}
     <style>
       .navbar {
         border-radius: 0;
@@ -66,8 +65,8 @@
       </div>
     </nav>
     <div>{% block content %} {% endblock %}</div>
-
     <script src="{% static 'js/jquery.min.js'  %}"></script>
     <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js'  %}"></script>
+    {% block js %} {% endblock %}
   </body>
 </html>

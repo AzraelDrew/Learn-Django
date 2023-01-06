@@ -156,7 +156,7 @@ def user_delete(request,nid):
 def pretty_list(request):
 
     # for i in range(300):
-    #     models.PrettyNumber.objects.create(mobile = "18188888888",price=88,level=2,status=3)
+    #     models.PrettyNumber.objects.create(mobile = "18188888888",price=88,level=2,status=2)
     # 搜索
     data_dict = {}
     search_value = request.GET.get("q","")
