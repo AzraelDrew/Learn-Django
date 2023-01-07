@@ -13,36 +13,34 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path
-from . import views
-urlpatterns = [
-    # path('admin/', admin.site.urls),
+from app.views import depart,user,pretty
 
+
+urlpatterns = [
 
     # 部门管理
-    path('index/', views.index),
-    path('depart/list/', views.derpat_list),
-    path('depart/add/', views.derpat_add),
-    path('depart/delete/', views.derpat_delete),
+    path('index/', depart.index),
+    path('depart/list/', depart.derpat_list),
+    path('depart/add/', depart.derpat_add),
+    path('depart/delete/', depart.derpat_delete),
     # 通过url传值与使用？传值类似
     # /depart/number/edit/    中间必须得传值比如   /depart/4/edit/
-    path('depart/<int:nid>/edit/', views.derpat_edit),
+    path('depart/<int:nid>/edit/', depart.derpat_edit),
 
 
     # 用户管理
-    path('user/list/', views.user_list),
-    path('user/add/', views.user_add),
-    path('user/modelform/add/', views.user_modelform_add),
-    path('user/<int:nid>/edit/', views.user_edit),
-    path('user/<int:nid>/delete/', views.user_delete),
+    path('user/list/', user.user_list),
+    path('user/add/', user.user_add),
+    path('user/modelform/add/', user.user_modelform_add),
+    path('user/<int:nid>/edit/', user.user_edit),
+    path('user/<int:nid>/delete/', user.user_delete),
 
 
     # 靓号管理
-    path('pretty/list/',views.pretty_list),
-    path('pretty/add/',views.pretty_add),
-    path('pretty/<int:nid>/edit/', views.pretty_edit),
-    path('pretty/<int:nid>/delete/', views.pretty_delete),
+    path('pretty/list/',pretty.pretty_list),
+    path('pretty/add/',pretty.pretty_add),
+    path('pretty/<int:nid>/edit/', pretty.pretty_edit),
+    path('pretty/<int:nid>/delete/', pretty.pretty_delete),
 
-
-]
+]   
