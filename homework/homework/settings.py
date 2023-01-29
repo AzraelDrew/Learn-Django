@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-l)i-mo7@tx78j+hb6*o#fab1-@+o^5fu8qx+5eav$@i+3ght*w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -48,6 +48,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 添加自定义中间件
+    'app.middleware.auth.AuthLoginMiddleware'
 ]
 
 ROOT_URLCONF = 'homework.urls'
@@ -79,7 +81,7 @@ DATABASES = {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
-            'default': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'homework',   #databasesname
         'USER': 'root',     #username

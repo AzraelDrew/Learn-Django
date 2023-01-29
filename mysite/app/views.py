@@ -93,6 +93,9 @@ def orm(request):
         # UserInfo.objects.create(name="Alex",password="666",age=29)
         # UserInfo.objects.create(name="drew",password="666")
 
+        # object = UserInfo(name="test",password="123",age=22)
+        # object.save()
+
 
         # ### 2.删除 ###
         # UserInfo.objects.filter(age=2).delete()   #删除age=2的数据

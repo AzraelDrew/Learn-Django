@@ -1,6 +1,16 @@
 from django.db import models
 
 # Create your models here.
+
+# 管理员
+class Admin(models.Model):
+    username = models.CharField(verbose_name="用户名",max_length=32)
+    password = models.CharField(verbose_name="密码",max_length=64 )
+
+
+    # 设置关联当前表时的返回值   默认是一个对象   
+    def __str__(self):
+        return self.username
 # 部门表
 class Department(models.Model):
     title = models.CharField(verbose_name="标题",max_length=32)   # verbose_name  对当前列进行备注(可以写可不写)
@@ -62,3 +72,38 @@ class PrettyNumber(models.Model):
         (2,"未占用"),
     )
     status = models.SmallIntegerField(verbose_name="状态",choices=status_choices,default=1 ) 
+
+# 任务   
+class Task(models.Model):
+    level_choices = (
+        (1,"紧急"),
+        (2,"重要"),
+        (3,"临时")
+    )
+    level = models.SmallIntegerField(verbose_name="级别",choices=level_choices,default=1)
+    user = models.ForeignKey(verbose_name="负责人",to="Admin",on_delete=models.CASCADE)
+    title = models.CharField(verbose_name="标题",max_length=64)
+    detail = models.TextField(verbose_name="详细信息")
+
+
+
+class Order(models.Model):
+    oid = models.CharField(verbose_name="订单号",max_length=64)
+    title = models.CharField(verbose_name="名称",max_length=64)
+    price= models.IntegerField(verbose_name="价格")
+
+    status_choices = (
+        (1,"待支付"),
+        (2,"已支付")
+    )
+    status = models.SmallIntegerField(verbose_name="状态",choices=status_choices,default=1)
+
+    admin = models.ForeignKey(verbose_name="管理员",to="Admin",on_delete=models.CASCADE)
+
+
+
+
+class Boos(models.Model):
+    name = models.CharField(verbose_name="姓名",max_length=32)
+    age = models.IntegerField(verbose_name="年龄") 
+    img = models.CharField(verbose_name="头像",max_length=128)

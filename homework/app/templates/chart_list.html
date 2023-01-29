@@ -1,0 +1,255 @@
+{% extends "layout.html" %} {% load static%} {% block content %}
+
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">折线图</div>
+    <div class="panel-body"><div id="m1" style="height: 400px"></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-7">
+      <div class="panel panel-default">
+        <div class="panel-heading">柱状图</div>
+        <div class="panel-body"><div id="m2" style="height: 400px"></div></div>
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">饼图</div>
+        <div class="panel-body"><div id="m3" style="height: 400px"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block js %}
+<script src="{% static 'js/echarts.min.js' %}"></script>
+<script type="text/javascript">
+  $(function () {
+    initBar();
+    initPie();
+    initLine();
+  });
+
+  // 初始化柱状图
+  function initBar() {
+    // 基于准备好的dom，初始化echarts实例
+    let myChart = echarts.init(document.getElementById('m2'));
+
+    // 指定图表的配置项和数据
+    let option = {
+      title: {
+        text: '销售信息',
+        textAlign: 'auto',
+        left: 'center',
+      },
+      tooltip: {},
+      legend: {
+        data: [], //后台获取
+        bottom: 0,
+      },
+      xAxis: {
+        data: [], //后台获取
+      },
+      yAxis: {},
+      series: [], //后台获取
+    };
+
+    $.ajax({
+      url: '/chart/bar/',
+      type: 'GET',
+      dataType: 'JSON',
+      success: function (res) {
+        console.log(res);
+        if (res.status) {
+          // 将后台返回的数据更新到option中
+          option.legend.data = res.data.legend;
+          option.xAxis.data = res.data.x_axis;
+          option.series = res.data.series_list;
+          // 使用刚指定的配置项和数据显示图表。
+          myChart.setOption(option);
+        }
+      },
+    });
+  }
+  // 初始化饼图
+  function initPie() {
+    // 基于准备好的dom，初始化echarts实例
+    let myChart = echarts.init(document.getElementById('m3'));
+
+    // 指定图表的配置项和数据
+    let option = {
+      title: {
+        text: 'Referer of a Website',
+        left: 'center',
+      },
+      tooltip: {
+        trigger: 'item',
+      },
+      legend: {
+        orient: 'horizontal',
+        bottom: 0,
+      },
+      series: [
+        {
+          name: 'Access From',
+          type: 'pie',
+          radius: ['40%', '70%'],
+          avoidLabelOverlap: false,
+          itemStyle: {
+            borderRadius: 10,
+            borderColor: '#fff',
+            borderWidth: 2,
+          },
+          label: {
+            show: false,
+            position: 'center',
+          },
+          emphasis: {
+            label: {
+              show: true,
+              fontSize: 40,
+              fontWeight: 'bold',
+            },
+          },
+          labelLine: {
+            show: false,
+          },
+          data: [],
+        },
+      ],
+    };
+    $.ajax({
+      url: '/chart/pie/',
+      type: 'GET',
+      dataType: 'JSON',
+      success: function (res) {
+        // console.log(res);
+        if (res.status) {
+          option.series[0].data = res.data;
+          // console.log(option.series[0]);
+          myChart.setOption(option);
+        }
+      },
+    });
+  }
+
+  // 初始化折线图
+  function initLine() {
+    let myChart = echarts.init(document.getElementById('m1'));
+
+    let option = {
+      color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
+      title: {
+        text: 'Gradient Stacked Area Chart',
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          label: {
+            backgroundColor: '#6a7985',
+          },
+        },
+      },
+      legend: {
+        data: ['Line 1', 'Line 2'],
+        bottom: 0,
+      },
+      toolbox: {
+        feature: {
+          saveAsImage: {},
+        },
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '8%',
+        containLabel: true,
+      },
+      xAxis: [
+        {
+          type: 'category',
+          boundaryGap: false,
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        },
+      ],
+      yAxis: [
+        {
+          type: 'value',
+        },
+      ],
+      series: [
+        {
+          name: 'Line 1',
+          type: 'line',
+          stack: 'Total',
+          smooth: true,
+          lineStyle: {
+            width: 0,
+          },
+          showSymbol: false,
+          areaStyle: {
+            opacity: 0.8,
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgb(128, 255, 165)',
+              },
+              {
+                offset: 1,
+                color: 'rgb(1, 191, 236)',
+              },
+            ]),
+          },
+          emphasis: {
+            focus: 'series',
+          },
+          data: [140, 232, 101, 264, 90, 340, 250],
+        },
+        {
+          name: 'Line 2',
+          type: 'line',
+          stack: 'Total',
+          smooth: true,
+          lineStyle: {
+            width: 0,
+          },
+          showSymbol: false,
+          areaStyle: {
+            opacity: 0.8,
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgb(128, 255, 165)',
+              },
+              {
+                offset: 1,
+                color: 'rgb(255, 191, 236)',
+              },
+            ]),
+          },
+          emphasis: {
+            focus: 'series',
+          },
+          data: [100, 132, 201, 104, 80, 440, 150],
+        },
+      ],
+    };
+    $.ajax({
+      url: '/chart/line/',
+      type: 'GET',
+      dataType: 'JSON',
+      success: function (res) {
+        if (res.status) {
+          console.log(res);
+          option.legend.data = res.data.legend;
+          option.xAxis.data = res.data.x_axis;
+          option.series[0].data = res.data.series_list[0].data;
+          option.series[1].data = res.data.series_list[1].data;
+          myChart.setOption(option);
+        }
+      },
+    });
+  }
+</script>
+{% endblock %}

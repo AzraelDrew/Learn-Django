@@ -1,0 +1,14 @@
+{% extends "layout.html" %} {% block content %}
+
+<div class="container">
+  <!--
+        在form中添加如下属性使提交的是文件内容,而不是字符串
+        enctype="multipart/form-data" -->
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" name="username" />
+    <input type="file" name="avatar" />
+    <input type="submit" value="提交" />
+  </form>
+</div>
+{% endblock %}
