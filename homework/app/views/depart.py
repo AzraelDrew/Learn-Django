@@ -7,6 +7,7 @@ from app.utils.pagination import Pagination  # 分页组件(实现)
 # from django.core.files.uploadedfile import InMemoryUploadedFile
 
 # Create your views here.
+"""  部门管理 """
 
 
 def index(request):

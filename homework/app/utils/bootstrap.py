@@ -2,6 +2,7 @@ from django import forms
 
 
 class BootStrapModelForm(forms.ModelForm):
+    """ ModelFormBootStrap样式 """
     bootstrap_exclude_fields = ['img']
 
     def __init__(self, *args, **kwargs):
@@ -25,6 +26,7 @@ class BootStrapModelForm(forms.ModelForm):
 
 
 class BootStrapForm(forms.Form):
+    """ FormBootStrap样式 """
     # 需要忽略样式的字段
     bootstrap_exclude_fields = ['img']
 

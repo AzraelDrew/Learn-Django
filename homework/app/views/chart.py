@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+""" 图表 """
 
 
 def chart_list(request):
@@ -7,6 +8,7 @@ def chart_list(request):
 
 
 # 柱状图
+
 
 def chart_bar(request):
     legend = ["销量", "业绩"]
@@ -31,7 +33,6 @@ def chart_bar(request):
             "legend": legend,
             "series_list": series_list,
             "x_axis": x_axis
-
         }
     }
     return JsonResponse(result)
@@ -39,11 +40,21 @@ def chart_bar(request):
 
 def chart_pie(request):
     result = {
-        "status": True,
+        "status":
+        True,
         "data": [
-            {"value": 2048, "name": 'Search Engine'},
-            {"value": 735, "name": 'Direct'},
-            {"value": 580, "name": 'Email'},
+            {
+                "value": 2048,
+                "name": 'Search Engine'
+            },
+            {
+                "value": 735,
+                "name": 'Direct'
+            },
+            {
+                "value": 580,
+                "name": 'Email'
+            },
         ]
     }
     return JsonResponse(result)
@@ -68,7 +79,6 @@ def chart_line(request):
             "legend": legend,
             "x_axis": x_axis,
             "series_list": series_list,
-
         }
     }
     return JsonResponse(result)

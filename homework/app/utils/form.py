@@ -4,14 +4,15 @@ from django import forms  # form组件(django)
 from app import models  # 数据库
 from app.utils.bootstrap import BootStrapModelForm, BootStrapForm  # BootStrap   ModelForm  样式
 from app.utils.encrypt import md5
+""" Form与ModelForm """
 
 
 # modelform 添加用户
 #    用户信息modelform
-class UserModelForm(
-        BootStrapModelForm
-):  #class  classname(BootStrapModelForm):      继承BootStrap样式
-    name = forms.CharField(min_length=3, label="用户名")
+class UserModelForm(BootStrapModelForm):
+    #class  classname(BootStrapModelForm):      继承BootStrap样式
+
+    name = forms.CharField(min_length=2, label="用户名")
 
     class Meta:
         model = models.UserInfo
@@ -34,6 +35,12 @@ class PrettyEditModelForm(BootStrapModelForm):
         exists = models.PrettyNumber.objects.exclude(
             id=self.instance.pk).filter(
                 mobile=text_mobile)  # exclude(id=number)   排除当前id的数据
+        # print('number', self.instance.mobile)
+        # print('price', self.instance.price)
+        # print('level', self.instance.level)
+        # print('status', self.instance.status)
+        # print('id', self.instance.id)
+        # print('pk', self.instance.pk)
         if exists:
             raise ValidationError("手机号已存在")
         return text_mobile
@@ -191,14 +198,14 @@ class OrderModelForm(BootStrapModelForm):
         exclude = ["oid", "admin"]
 
 
-class UpForm(BootStrapForm):
-    name = forms.CharField(label="姓名")
-    age = forms.IntegerField(label="年龄")
-    img = forms.FileField(label="头像")
-
-
 class UpModelForm(BootStrapModelForm):
 
     class Meta:
         model = models.City
         fields = "__all__"
+
+
+class UpForm(BootStrapForm):
+    name = forms.CharField(label="姓名")
+    age = forms.IntegerField(label="年龄")
+    img = forms.FileField(label="头像")

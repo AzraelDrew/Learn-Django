@@ -4,10 +4,10 @@ from django.core.exceptions import ValidationError  # 规则验证报错
 from app import models  # 数据库
 from app.utils.pagination import Pagination  # 分页组件(实现)
 from app.utils.form import UserModelForm  # BootStrap   ModelForm  样式
+"""  用户管理 """
 
 
 # 用户列表
-
 def user_list(request):
     # 获取所有的用户
     queryset = models.UserInfo.objects.all()
@@ -44,9 +44,14 @@ def user_add(request):
     create_time = request.POST.get("create_time")
     gender_id = request.POST.get("gender")
     depart_id = request.POST.get("depart")
-    # print(user,password,age,account,create_time,gender_id,depart_id) 
-    models.UserInfo.objects.create(name=user, password=password, age=age, account=account, create_time=create_time,
-                                   gender=gender_id, depart_id=depart_id)
+    # print(user,password,age,account,create_time,gender_id,depart_id)
+    models.UserInfo.objects.create(name=user,
+                                   password=password,
+                                   age=age,
+                                   account=account,
+                                   create_time=create_time,
+                                   gender=gender_id,
+                                   depart_id=depart_id)
 
     # 重定向
     return redirect("/user/list/")
@@ -75,11 +80,12 @@ def user_edit(request, nid):
     #  根据ID获取需要编辑的数据
     row_obj = models.UserInfo.objects.filter(id=nid).first()
     if request.method == "GET":
-        #  instance = row_obj   # 当前编辑的数据
+        #  instance = row_obj   # 当前数据库中的的数据
         form = UserModelForm(instance=row_obj)
         return render(request, "user_edit.html", {"form": form})
     form = UserModelForm(data=request.POST, instance=row_obj)
     if form.is_valid():
+        # print(form.cleaned_data)
         form.save()
         return redirect("/user/list/")
     return render(request, "user_edit.html", {"form": form})

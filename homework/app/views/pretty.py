@@ -4,9 +4,10 @@ from django.core.exceptions import ValidationError  # 规则验证报错
 from app import models  # 数据库
 from app.utils.pagination import Pagination  # 分页组件(实现)
 from app.utils.form import PrettyEditModelForm, PrettyModelForm  # BootStrap   ModelForm  样式
-
+""" 靓号管理 """
 
 # 靓号列表
+
 
 def pretty_list(request):
     # for i in range(300):

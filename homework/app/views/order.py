@@ -8,10 +8,14 @@ from app.utils.form import OrderModelForm
 from app.utils.pagination import Pagination
 
 import random
+""" 订单管理 """
 
 
 def order_list(request):
     queryset = models.Order.objects.all().order_by("-id")
+    obj = queryset.first()
+    print(obj.admin.id)
+    print(obj.admin_id)
     form = OrderModelForm()
     page_object = Pagination(request, queryset)
     context = {
@@ -32,12 +36,13 @@ def order_add(request):
         # modelform在保存之前插入非用户提交的数据(或更改提交的数据)
         # form.instance.字段名 =  "xxxxxx"
         # 插入订单号
-        form.instance.oid = datetime.now().strftime("%Y%m%d%H%M%S") + str(random.randint(1000, 9999))
+        form.instance.oid = datetime.now().strftime("%Y%m%d%H%M%S") + str(
+            random.randint(1000, 9999))
         # form.instance.price = 9999
         # 订单管理员为当前用户
         print(request.session["info"]["id"])
         form.instance.admin_id = request.session["info"]["id"]
-        # 
+        #
         form.save()
 
         # 下面两行代码等价
@@ -81,7 +86,8 @@ def order_detail(request):
     #   # 此方法获取到的是对象
     # row_object = models.Order.objects.filter(id = uid).first()
     #  获取的是一个字典   只包括values中的列
-    row_object = models.Order.objects.filter(id=uid).values("title", "price", "status").first()
+    row_object = models.Order.objects.filter(id=uid).values(
+        "title", "price", "status").first()
     print(row_object)
 
     # # 列表中套字典

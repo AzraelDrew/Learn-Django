@@ -5,6 +5,7 @@ from app import models
 import json
 
 from app.utils.pagination import Pagination
+""" 任务管理 """
 
 
 def task_list(request):
@@ -27,9 +28,7 @@ def task_ajax(request):
     print(request.POST)
     print("ajax")
 
-    data_dict = {
-        "statuc": True, "data": [11, 22, 33, 44]
-    }
+    data_dict = {"statuc": True, "data": [11, 22, 33, 44]}
     # json_data = json.dumps(data_dict)   #  将python数据json化
     return HttpResponse(json.dumps(data_dict))
 
@@ -37,15 +36,13 @@ def task_ajax(request):
 @csrf_exempt  # 免除csrf_token认证
 def task_add(request):
     # print(request.POST)
-    # 对用户发送的数据进行校验     
+    # 对用户发送的数据进行校验
 
     form = TaskModelForm(data=request.POST)
 
     if form.is_valid():
         form.save()
-        data_dict = {
-            "status": True
-        }
+        data_dict = {"status": True}
         return HttpResponse(json.dumps(data_dict))
 
     data_dict = {"status": False, "error": form.errors}

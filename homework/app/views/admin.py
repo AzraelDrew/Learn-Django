@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from app import models  # 数据库
 from app.utils.pagination import Pagination  # 分页组件(实现)
 from app.utils.form import AdminModelForm, AdminEditModelForm, AdminResetModelForm
+""" 管理员 """
 
 
 # 管理员列表
@@ -12,29 +13,34 @@ def admin_list(request):
     # info = request.session.get("info")
     # print('info',info)
     # if not info :
-    #     return redirect("/login/") 
+    #     return redirect("/login/")
 
     data_dict = {}
     search_value = request.GET.get("q", "")
     if search_value:
+        # 筛选username中包含search_value的数据
         data_dict["username__contains"] = search_value
+        print(data_dict)
     queryset = models.Admin.objects.filter(**data_dict)
+    # queryset = models.Admin.objects.filter(username__contains=search_value)
     page_object = Pagination(request, queryset)
     context = {
         "queryset": page_object.page_queryset,  # 分页完都数据
         "page_string": page_object.html(),  # 生成页码
         "search_value": search_value,
-
     }
     return render(request, "admin_list.html", context)
 
 
-# t添加管理员
+# 添加管理员
 def admin_add(request):
     title = "新建管理员"
     if request.method == "GET":
         form = AdminModelForm()
-        return render(request, "add_and_edit.html", {"title": title, "form": form})
+        return render(request, "add_and_edit.html", {
+            "title": title,
+            "form": form
+        })
     form = AdminModelForm(data=request.POST)
     if form.is_valid():
         clean_data = form.cleaned_data  # 验证通过后的所有信息
@@ -52,7 +58,10 @@ def admin_edit(request, nid):
         if not row_object:
             return redirect("/admin/list/")
         form = AdminEditModelForm(instance=row_object)
-        return render(request, "add_and_edit.html", {"title": title, "form": form})
+        return render(request, "add_and_edit.html", {
+            "title": title,
+            "form": form
+        })
     form = AdminEditModelForm(data=request.POST, instance=row_object)
     if form.is_valid():
         form.save()
@@ -75,7 +84,10 @@ def admin_reset(request, nid):
             return redirect("/admin/list/")
 
         form = AdminResetModelForm()
-        return render(request, "add_and_edit.html", {"title": title, "form": form})
+        return render(request, "add_and_edit.html", {
+            "title": title,
+            "form": form
+        })
 
     form = AdminResetModelForm(data=request.POST, instance=row_object)
     if form.is_valid():

@@ -1,7 +1,13 @@
 import random
-from PIL import Image,ImageDraw,ImageFont,ImageFilter
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-def check_code(width=120, height=30, char_length=5, font_file='Monaco.ttf', font_size=28):
+
+def check_code(width=120,
+               height=30,
+               char_length=5,
+               font_file='Monaco.ttf',
+               font_size=28):
+    """ 图片验证码 """
     code = []
     img = Image.new(mode='RGB', size=(width, height), color=(255, 255, 255))
     draw = ImageDraw.Draw(img, mode='RGB')
@@ -20,7 +26,8 @@ def check_code(width=120, height=30, char_length=5, font_file='Monaco.ttf', font
         生成随机颜色
         :return:
         """
-        return (random.randint(0, 255), random.randint(10, 255), random.randint(64, 255))
+        return (random.randint(0, 255), random.randint(10, 255),
+                random.randint(64, 255))
 
     # 写文字
     font = ImageFont.truetype(font_file, font_size)
@@ -28,15 +35,22 @@ def check_code(width=120, height=30, char_length=5, font_file='Monaco.ttf', font
         char = rndChar()
         code.append(char)
         h = random.randint(0, 4)
-        draw.text([i * width / char_length, h], char, font=font, fill=rndColor())
+        draw.text([i * width / char_length, h],
+                  char,
+                  font=font,
+                  fill=rndColor())
 
     # 写干扰点
     for i in range(40):
-        draw.point([random.randint(0, width), random.randint(0, height)], fill=rndColor())
+        draw.point([random.randint(0, width),
+                    random.randint(0, height)],
+                   fill=rndColor())
 
     # 写干扰圆圈
     for i in range(40):
-        draw.point([random.randint(0, width), random.randint(0, height)], fill=rndColor())
+        draw.point([random.randint(0, width),
+                    random.randint(0, height)],
+                   fill=rndColor())
         x = random.randint(0, width)
         y = random.randint(0, height)
         draw.arc((x, y, x + 4, y + 4), 0, 90, fill=rndColor())

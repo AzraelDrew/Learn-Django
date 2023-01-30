@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse
 from app.utils.form import UpForm, UpModelForm
 from app import models
 import os
+""" 文件上传 """
 
 
 def upload_list(request):

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from app import models
 from app.utils.form import LoginForm
 from app.utils.code import check_code
+""" 登录与注销管理 """
 
 
 def login(request):
@@ -13,7 +14,7 @@ def login(request):
         # 验证成功后提交的数据
         # print(form.cleaned_data)
 
-        # Form与ModelForm  
+        # Form与ModelForm
         # Form没有  form.save()方法   因为ModelFrom是关联数据库的而Form没有
 
         # 验证码的校验
@@ -32,7 +33,10 @@ def login(request):
         # 用户名和密码正确
         # 网站生成随机字符串;写到用户浏览器的cookie中;再写入到session中;
         # 随机字符串存储在浏览器的cookie中和数据库的django_session中
-        request.session["info"] = {"id": admin_object.id, "name": admin_object.username}
+        request.session["info"] = {
+            "id": admin_object.id,
+            "name": admin_object.username
+        }
         # 登录信息可以保存7天
         request.session.set_expiry(60 * 60 * 24 * 7)
 
@@ -47,7 +51,7 @@ from io import BytesIO
 def image_code(request):
     img, code_str = check_code()
 
-    #  将图片验证码保存到session中 (以便于后续获取验证码再进行校验) 
+    #  将图片验证码保存到session中 (以便于后续获取验证码再进行校验)
     request.session["image_code"] = code_str
     # 给session设置60s超时
     request.session.set_expiry(60)
