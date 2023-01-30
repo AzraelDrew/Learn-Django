@@ -1,0 +1,60 @@
+{% extends "layout.html" %} {% block content%}
+
+<div class="container">
+  <div style="margin-bottom: 10px">
+    <a class="btn btn-success" href="/city/add/">
+      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+      添加城市</a
+    >
+    <div style="float: right; width: 400px">
+      <form method="GET">
+        <div class="input-group">
+          <input
+            type="text"
+            name="q"
+            class="form-control"
+            placeholder="Search for..."
+            value="{{search_value}}"
+          />
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+      城市列表
+    </div>
+
+    <!-- Table -->
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Logo</th>
+          <th>名称</th>
+          <th>人口</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in queryset%}
+        <tr>
+          <th>{{item.id}}</th>
+          <td>
+            <img src="/media/{{item.img}}" alt="" style="height: 80px" />
+          </td>
+          <td>{{item.name}}</td>
+          <td>{{item.count}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

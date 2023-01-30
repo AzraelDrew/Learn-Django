@@ -13,10 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path
-from app.views import depart, user, pretty, admin, account, task, order, chart, upload
+from django.urls import path, re_path
+from django.conf.urls.static import static
+from django.views.static import serve
+from django.conf import settings
+from app.views import depart, user, pretty, admin, account, task, order, chart, upload, city
 
 urlpatterns = [
+    # 用户上传的文件存放的文件夹(方式一)
+    # re_path(r"^media/(?P<path>.*)$",
+    #         serve, {'document_root': settings.MEDIA_ROOT},
+    #         name="media"),
 
     # 管理员
     path('admin/list/', admin.admin_list),
@@ -74,4 +81,10 @@ urlpatterns = [
     # 文件上传
     path('upload/list/', upload.upload_list),
     path('upload/form/', upload.upload_form),
-]
+    path('upload/modelform/', upload.upload_model_form),
+
+    # 城市
+    path('city/list/', city.city_list),
+    path('city/add/', city.city_add),
+] + static(settings.MEDIA_URL,
+           document_root=settings.MEDIA_ROOT)  # 用户上传的文件存放的文件夹(方式二)
